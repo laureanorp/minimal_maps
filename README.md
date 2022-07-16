@@ -1,4 +1,4 @@
-# Colorful maps
+# Minimal maps
 
 #### Get a minimal and colorful map of a given location · Flask + Nominatim + Google Maps
 
