@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Colorful Maps</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/custom.css">
+</head>
+
+<body>
+<div class="container">
+
+    <h1>Colorful Maps</h1>
+
+    <div>
+        <form method="post" action="">
+            <label>
+                <input type="text" name="location" required placeholder="🔍 Type a location"/>
+            </label>
+            <input type="hidden" id="palette" name="palette" value="">
+
+            <!-- For color in palette, render squares without margin -->
+            <div class="palettes_grid">
+                <h4>Choose a palette</h4>
+                <div class="palette_1">
+                    <div class="square" style="background-color: #212121"></div>
+                    <div class="square" style="background-color: #424242"></div>
+                    <div class="square" style="background-color: #616161"></div>
+                    <div class="square" style="background-color: #757575"></div>
+                </div>
+                <div class="palette_2">
+                    <div class="square" style="background-color: #212121"></div>
+                    <div class="square" style="background-color: #36ce7e"></div>
+                    <div class="square" style="background-color: #15464c"></div>
+                    <div class="square" style="background-color: #474747"></div>
+                </div>
+                <div class="palette_3">
+                    <div class="square" style="background-color: #FFFF00"></div>
+                    <div class="square" style="background-color: #00FFFF"></div>
+                    <div class="square" style="background-color: #FF7F00"></div>
+                    <div class="square" style="background-color: #FF0000"></div>
+                </div>
+            </div>
+
+            {% if error %}
+            <p>{{ error }}</p>
+            {% endif %}
+
+            <input type="submit" name="create_map" value="🌐 Create map">
+
+        </form>
+    </div>
+
+    {% if rendered_map %}
+    <div id="map_div">
+        <img id='map' src="{{ rendered_map }}" alt="Your map">
+    </div>
+    <!-- <input type="button" name="download_map" value="⬇️ Download"> -->
+    {% endif %}
+
+</div>
+
+<script>
+    //  when we click on palette div, add the "selected" class
+    const palettes = document.querySelectorAll('.palette_1, .palette_2, .palette_3');
+    const palette_field = document.getElementById("palette")
+
+    for (const palette of palettes) {
+        palette.addEventListener('click', function handleClick() {
+            // toggle selected class on the clicked palette, remove from the rest
+            for (const palette of palettes) {
+                palette.classList.remove('selected');
+            }
+            this.classList.add('selected');
+            // save to a list all the background colors of all the squares in the palette
+            const colors = [];
+            const squares = this.querySelectorAll('.square');
+            for (const square of squares) {
+                colors.push(square.style.backgroundColor);
+            }
+            // save the list to the hidden field
+            palette_field.value = colors.join('-');
+        });
+    }
+</script>
+
+</body>
+</html>
