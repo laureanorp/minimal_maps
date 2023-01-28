@@ -1,16 +1,13 @@
 from typing import List
-
+   
 import requests
 from flask import Flask, render_template, request
 from geopy import Nominatim
 
 app = Flask(__name__)
-app.config['GMAPS_API_KEY'] = ''  # YOUR GOOGLE MAPS API KEY HERE
-
-
-# I found no working library for this, so...
-def rgb_to_hex(rgb):
-    return '%02x%02x%02x' % rgb
+# open gmaps_key.txt file
+with open('gmaps_key.txt', 'r') as f:  # YOUR GOOGLE MAPS API KEY TXT FILE
+    app.config['GMAPS_API_KEY'] = f.read()
 
 
 def get_redered_map_url(address: str, palette: List[str]) -> str:
@@ -36,9 +33,9 @@ def get_redered_map_url(address: str, palette: List[str]) -> str:
         'key': app.config["GMAPS_API_KEY"],
         'scale': '2',
     }
-    map = requests.get('https://maps.googleapis.com/maps/api/staticmap', params=query)
+    gmap = requests.get('https://maps.googleapis.com/maps/api/staticmap', params=query)
 
-    return map.request.url
+    return gmap.request.url
 
 
 @app.route('/', methods=['GET'])
@@ -53,18 +50,9 @@ def home():
 def request_and_show_map():
     # Get parameters for the API request
     address = request.form['location']
-    palette = request.form['palette'].split('-')
-    if len(palette) != 4:
+    hex_palette = request.form['palette'].split('-')
+    if len(hex_palette) != 4:
         return render_template('index.html', error="Choose a color palette before continuing")
-
-    # Convert the RGB string values to a tuple of HEX values
-    hex_palette = []
-    for color in palette:
-        color = color.replace('rgb(', '').replace(')', '').split(',')
-        color = tuple(int(c) for c in color)
-        hex_color = rgb_to_hex(color)
-        hex_palette.append(hex_color)
-
     # Normalise the input address
     try:
         geolocator = Nominatim(user_agent="laureanorp")
@@ -72,13 +60,12 @@ def request_and_show_map():
     except Exception as e:
         app.logger.error(e)
         return render_template('index.html', error="We couldn't find that location, please try another")
-
     # Get the map image
     try:
         return render_template('index.html', rendered_map=get_redered_map_url(normalised_address, hex_palette))
     except Exception as e:
         app.logger.error(e)
-        return render_template('index.html', error="An unexpected error occurred :(")
+        return render_template('index.html', error="Sorry, an unexpected error occurred :(")
 
 
 if __name__ == '__main__':

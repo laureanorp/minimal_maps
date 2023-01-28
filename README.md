@@ -13,6 +13,6 @@ Future improvements I want to do:
 1. Clone/download repo
 2. Create a venv (recommended, but there are only 3 required dependencies)
 3. Run `pip install -r requirements.txt`
-4. Insert your Google Maps API key in `app.py`
+4. Add the file `gmaps_key.txt` with your Google Maps API key
 5. Run `python app.py`
 6. Open http://localhost:5000/
