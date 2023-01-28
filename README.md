@@ -4,11 +4,7 @@
 
 #### Get a minimal and colorful map of a given location · Flask + Nominatim + Google Maps
 
-After trying some geocoders and APIs, I decided wanted to experiment a bit with Google Maps' API. This Flask app takes a location as input, as well as a color palette, and returns a minimalistic map of the location to see/download.
-
-Future improvements I want to do:
-- More palettes/custom palettes support
-- Better responsive design
+After trying some geocoders and APIs, I decided wanted to experiment a bit with Google Maps' API. This Flask app takes a location as input, as well as a color palette, and returns a minimalistic map of the location to see/download. This work is inspired by [Matteo Lobello's andrioid app](https://play.google.com/store/apps/details?id=com.matteolobello.mapapers).
 
 ## Running the project
 

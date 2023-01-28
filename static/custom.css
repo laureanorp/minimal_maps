@@ -1,4 +1,3 @@
-
 * {
     font-family: 'Montserrat', sans-serif;
     transition: all 0.2s ease-out;
@@ -19,7 +18,7 @@ body {
     }
 }
 
-div {
+.section {
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
@@ -38,7 +37,9 @@ input[type=text]:focus {
     box-shadow: 0 8px 15px 0 rgb(225 225 225);
 }
 
-input[type=submit], input[type=button] {
+input[type=submit],
+input[type=button],
+.pretty_button {
     padding: 0.75rem;
     background-color: #753ad4;
     border-radius: 10px;
@@ -64,14 +65,8 @@ input[type=submit]:hover, input[type=button]:hover {
     justify-items: center;
 }
 
-.pretty_button {
-    padding: 0.75rem;
-    background-color: white;
-    border-radius: 10px;
-    border: 0;
-    box-shadow: 0 4px 10px 0 rgb(117 58 212 / 40%);
-    color: #212121;
-    font-weight: 600;
+button, input {
+    cursor: pointer;
 }
 
 #custom_palette {
@@ -85,8 +80,13 @@ input[type=submit]:hover, input[type=button]:hover {
 dialog {
     border: none;
     border-radius: 0.5rem;
-    box-shadow: 0 8px 20px 10px #b8b8b8;
+    box-shadow: 0 8px 20px 10px rgba(0, 0, 0, 0.10);;
     padding: 3rem;
+}
+
+.dialog_content {
+    display: grid;
+    gap: 1rem;
 }
 
 #map_div {
@@ -100,7 +100,7 @@ dialog {
 }
 
 dialog::backdrop {
-    background: rgba(0, 0, 0, .25);
+    background: rgba(0, 0, 0, .4);
 }
 
 .palette {
@@ -110,7 +110,8 @@ dialog::backdrop {
     grid-template-rows: 1fr 1fr;
     border-radius: 50%;
     overflow: hidden;
-    margin: 0
+    margin: 0;
+    cursor: pointer;
 }
 
 .selected {
@@ -123,15 +124,18 @@ dialog::backdrop {
     margin: 0;
 }
 
-#custom_palette_button {
+#open_custom_palette,
+#open_settings {
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
     background-color: #753ad4;
     margin: 0;
+    cursor: pointer;
 }
 
-#custom_palette_button img {
+#open_custom_palette img,
+#open_settings img {
     margin: 1rem;
     width: 2rem;
 }

@@ -18,74 +18,112 @@
 
     <div>
         <form method="post" action="">
-            <div>
+            <div class="section">
                 <label>
                     <input type="text" name="location" required placeholder="🔍 Type a location"/>
                 </label>
                 <input type="hidden" id="palette" name="palette" value="">
             </div>
 
-            <div>
+            <div class="section">
                 <h4>Choose a palette</h4>
                 <div class="palettes_grid">
                     <div class="palette">
-                        <div class="color_sector" style="background-color: #212121;"></div>
-                        <div class="color_sector" style="background-color: #424242"></div>
-                        <div class="color_sector" style="background-color: #616161"></div>
-                        <div class="color_sector" style="background-color: #757575"></div>
+                        <div class="color_sector" style="background-color: #2d2d2d;"></div>
+                        <div class="color_sector" style="background-color: #2d3535"></div>
+                        <div class="color_sector" style="background-color: #405373"></div>
+                        <div class="color_sector" style="background-color: #85ffdd"></div>
                     </div>
                     <div class="palette">
-                        <div class="color_sector" style="background-color: #212121;"></div>
-                        <div class="color_sector" style="background-color: #36ce7e"></div>
-                        <div class="color_sector" style="background-color: #15464c"></div>
-                        <div class="color_sector" style="background-color: #474747"></div>
+                        <div class="color_sector" style="background-color: #314e88;"></div>
+                        <div class="color_sector" style="background-color: #cad6e2"></div>
+                        <div class="color_sector" style="background-color: #4b95d2"></div>
+                        <div class="color_sector" style="background-color: #3789d1"></div>
                     </div>
                     <div class="palette">
-                        <div class="color_sector" style="background-color: #FFFF00;"></div>
-                        <div class="color_sector" style="background-color: #00FFFF"></div>
-                        <div class="color_sector" style="background-color: #FF7F00"></div>
-                        <div class="color_sector" style="background-color: #FF0000"></div>
+                        <div class="color_sector" style="background-color: #7ec583;"></div>
+                        <div class="color_sector" style="background-color: #3ead82"></div>
+                        <div class="color_sector" style="background-color: #22b284"></div>
+                        <div class="color_sector" style="background-color: #f8f37e"></div>
                     </div>
                     <div class="palette">
-                        <div class="color_sector" style="background-color: #212121;"></div>
-                        <div class="color_sector" style="background-color: #36ce7e"></div>
-                        <div class="color_sector" style="background-color: #15464c"></div>
-                        <div class="color_sector" style="background-color: #474747"></div>
+                        <div class="color_sector" style="background-color: #7c2050;"></div>
+                        <div class="color_sector" style="background-color: #4e1538"></div>
+                        <div class="color_sector" style="background-color: #a13158"></div>
+                        <div class="color_sector" style="background-color: #de568c"></div>
                     </div>
-                    <div id="custom_palette_button">
-                        <img src="/static/settings.svg" alt="custom palette"/>
+                    <div class="palette">
+                        <div class="color_sector" style="background-color: #181818;"></div>
+                        <div class="color_sector" style="background-color: #000000"></div>
+                        <div class="color_sector" style="background-color: #212121"></div>
+                        <div class="color_sector" style="background-color: #3c3c3c"></div>
+                    </div>
+                    <div class="palette">
+                        <div class="color_sector" style="background-color: #162852;"></div>
+                        <div class="color_sector" style="background-color: #2f408e"></div>
+                        <div class="color_sector" style="background-color: #142d5f"></div>
+                        <div class="color_sector" style="background-color: #5dd6b9"></div>
+                    </div>
+                    <div class="palette">
+                        <div class="color_sector" style="background-color: #5d6883;"></div>
+                        <div class="color_sector" style="background-color: #2b313a"></div>
+                        <div class="color_sector" style="background-color: #40495c"></div>
+                        <div class="color_sector" style="background-color: #73bcbb"></div>
+                    </div>
+                    <div id="open_custom_palette">
+                        <img src="/static/palette.svg" alt="custom palette"/>
+                    </div>
+                    <div id="open_settings">
+                        <img src="/static/settings.svg" alt="settings"/>
                     </div>
                 </div>
             </div>
 
-            <div style="display: inline-grid; gap: 2rem;">
-                <input type="submit" name="create_map" value="🌐 Create map">
+            <div class="section" style="display: inline-grid; gap: 2rem;">
+                <input type="submit" name="create_map" value="Create map">
             </div>
 
             {% if error %}
             <p>⚠️ {{ error }}</p>
             {% endif %}
 
+            <dialog id="settings_dialog">
+                <h1>Settings</h1>
+                <div class="dialog_content">
+                    <label for="zoom_level">Aproximate zoom level:</label>
+                    <select id="zoom_level" name="zoom_level">
+                        <option value="5">Continent</option>
+                        <option value="10">City</option>
+                        <option value="15">Streets</option>
+                        <option value="18">Buildings</option>
+                    </select>
+                    <button type="button" id="close_settings" class="pretty_button">Done</button>
+                </div>
+            </dialog>
+
         </form>
 
-        <dialog>
+        <dialog id="custom_pallete_dialog">
             <h1>Select your own colors</h1>
-            <div id="custom_palette">
-                <label for="roads_color">Roads</label>
-                <input type="color" id="roads_color" value="#212121" style="background-color: white">
-                <label for="water_color">Water</label>
-                <input type="color" id="water_color" value="#36ce7e" style="background-color: white">
-                <label for="land_color">Land</label>
-                <input type="color" id="land_color" value="#15464c" style="background-color: white">
-                <label for="city_color">City</label>
-                <input type="color" id="city_color" value="#474747" style="background-color: white">
+            <div class="dialog_content">
+                <div id="custom_palette">
+                    <label for="roads_color">Roads</label>
+                    <input type="color" id="roads_color" value="#212121" style="background-color: white">
+                    <label for="water_color">Water</label>
+                    <input type="color" id="water_color" value="#36ce7e" style="background-color: white">
+                    <label for="land_color">Land</label>
+                    <input type="color" id="land_color" value="#15464c" style="background-color: white">
+                    <label for="city_color">City</label>
+                    <input type="color" id="city_color" value="#474747" style="background-color: white">
+                </div>
+                <button type="button" id="close_custom_palette" class="pretty_button">Done</button>
             </div>
-            <button id="close" class="pretty_button">Done</button>
         </dialog>
+
     </div>
 
     {% if rendered_map %}
-    <div id="map_div">
+    <div id="map_div" class="section">
         <img id='map' src="{{ rendered_map }}" alt="Your map">
     </div>
     <!-- <input type="button" name="download_map" value="⬇️ Download"> -->
@@ -98,7 +136,7 @@
     const rgba2hex = (rgba) =>
         `${rgba.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+\.{0,1}\d*))?\)$/).slice(1).map((n, i) => (i === 3 ? Math.round(parseFloat(n) * 255) : parseFloat(n)).toString(16).padStart(2, '0').replace('NaN', '')).join('')}`
     // Init custom palette button to apply effects
-    const custom_palette_button = document.querySelector('#custom_palette_button')
+    const open_custom_palette = document.querySelector('#open_custom_palette')
 
     // When we click on palette div, add the "selected" class
     const built_in_palettes = document.querySelectorAll(".palette");
@@ -108,7 +146,7 @@
             for (const palette of built_in_palettes) {
                 palette.classList.remove('selected');
             }
-            custom_palette_button.classList.remove('selected');
+            open_custom_palette.classList.remove('selected');
             this.classList.add('selected');
             // reset list of selected colors
             const colors = [];
@@ -123,11 +161,10 @@
         });
     }
 
-    const dialog = document.querySelector('dialog');
-    custom_palette_button.addEventListener('click', () => dialog.showModal());
-
-    const close = document.querySelector('#close');
-    close.addEventListener('click', function handleClick() {
+    const custom_pallete_dialog = document.querySelector('#custom_pallete_dialog');
+    const close_custom_palette = document.querySelector('#close_custom_palette');
+    open_custom_palette.addEventListener('click', () => custom_pallete_dialog.showModal());
+    close_custom_palette.addEventListener('click', function handleClick() {
         for (const palette of built_in_palettes) {
             palette.classList.remove('selected');
         }
@@ -138,12 +175,20 @@
         for (const custom_color of custom_colors) {
             colors.push(custom_color.value.replace('#', ''));
         }
-        custom_palette_button.classList.add('selected');
+        open_custom_palette.classList.add('selected');
         // save the list to the hidden field that we will send to the backend
         const palette_field = document.getElementById("palette");
         palette_field.value = colors.join('-');
-        dialog.close();
+        custom_pallete_dialog.close();
     })
+
+    // Settings dialog
+    const open_settings = document.querySelector('#open_settings')
+    const close_settings = document.querySelector('#close_settings');
+    const settings_dialog = document.querySelector('#settings_dialog');
+    open_settings.addEventListener('click', () => settings_dialog.showModal());
+    close_settings.addEventListener('click', () => settings_dialog.close());
+
 </script>
 
 </body>

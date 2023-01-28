@@ -1,5 +1,5 @@
 from typing import List
-   
+
 import requests
 from flask import Flask, render_template, request
 from geopy import Nominatim
@@ -10,17 +10,17 @@ with open('gmaps_key.txt', 'r') as f:  # YOUR GOOGLE MAPS API KEY TXT FILE
     app.config['GMAPS_API_KEY'] = f.read()
 
 
-def get_redered_map_url(address: str, palette: List[str]) -> str:
+def get_redered_map_url(address: str, palette: List[str], zoom: str) -> str:
     """ Given an address and a color palette, sends a request to the Google Maps API to get a rendered map image.  """
-    road_color, water_color, land_color, city_color = palette
+    land_color, water_color, city_color, roads_color = palette
 
     query = {
-        'size': '1000x1000',
-        'zoom': '15',
+        'size': '1280x1280',
+        'zoom': zoom,
         'center': address,
         'style': [
             f'feature:all|element:all|color:0x{land_color}',  # all on our main color
-            f'feature:road|element:geometry|color:0x{road_color}',  # road color
+            f'feature:road|element:geometry|color:0x{roads_color}',  # road color
             f'feature:road|element:geometry|visibility:simplified',  # simplified roads
             f'feature:water|element:geometry|color:0x{water_color}',  # water color
             f'feature:administrative|geometry:all|color:0x{city_color}',  # city color
@@ -51,6 +51,7 @@ def request_and_show_map():
     # Get parameters for the API request
     address = request.form['location']
     hex_palette = request.form['palette'].split('-')
+    zoom = request.form['zoom_level'] or '10'
     if len(hex_palette) != 4:
         return render_template('index.html', error="Choose a color palette before continuing")
     # Normalise the input address
@@ -62,7 +63,7 @@ def request_and_show_map():
         return render_template('index.html', error="We couldn't find that location, please try another")
     # Get the map image
     try:
-        return render_template('index.html', rendered_map=get_redered_map_url(normalised_address, hex_palette))
+        return render_template('index.html', rendered_map=get_redered_map_url(normalised_address, hex_palette, zoom))
     except Exception as e:
         app.logger.error(e)
         return render_template('index.html', error="Sorry, an unexpected error occurred :(")
