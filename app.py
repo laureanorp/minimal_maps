@@ -51,7 +51,7 @@ def request_and_show_map():
     # Get parameters for the API request
     address = request.form['location']
     hex_palette = request.form['palette'].split('-')
-    zoom = request.form['zoom_level'] or '10'
+    zoom = request.form['zoom_level']
     if len(hex_palette) != 4:
         return render_template('index.html', error="Choose a color palette before continuing")
     # Normalise the input address
