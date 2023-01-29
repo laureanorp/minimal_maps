@@ -12,99 +12,114 @@
 </head>
 
 <body>
-<div class="container">
 
-    <h1>Minimal Maps</h1>
+<main>
+    <div class="container">
 
-    <div>
-        <form method="post" action="">
-            <div class="section">
-                <label>
-                    <input type="text" name="location" required placeholder="🔍 Type a location"/>
-                </label>
-                <input type="hidden" id="palette" name="palette" value="">
-            </div>
+        <h1>Minimal Maps</h1>
 
-            <div class="section">
-                <h4>Choose a palette</h4>
-                <div class="palettes_grid">
-                    <div class="palette">
-                        <div class="color_sector" style="background-color: #2d2d2d;"></div>
-                        <div class="color_sector" style="background-color: #2d3535"></div>
-                        <div class="color_sector" style="background-color: #405373"></div>
-                        <div class="color_sector" style="background-color: #85ffdd"></div>
-                    </div>
-                    <div class="palette">
-                        <div class="color_sector" style="background-color: #314e88;"></div>
-                        <div class="color_sector" style="background-color: #cad6e2"></div>
-                        <div class="color_sector" style="background-color: #4b95d2"></div>
-                        <div class="color_sector" style="background-color: #3789d1"></div>
-                    </div>
-                    <div class="palette">
-                        <div class="color_sector" style="background-color: #7ec583;"></div>
-                        <div class="color_sector" style="background-color: #3ead82"></div>
-                        <div class="color_sector" style="background-color: #22b284"></div>
-                        <div class="color_sector" style="background-color: #f8f37e"></div>
-                    </div>
-                    <div class="palette">
-                        <div class="color_sector" style="background-color: #7c2050;"></div>
-                        <div class="color_sector" style="background-color: #4e1538"></div>
-                        <div class="color_sector" style="background-color: #a13158"></div>
-                        <div class="color_sector" style="background-color: #de568c"></div>
-                    </div>
-                    <div class="palette">
-                        <div class="color_sector" style="background-color: #181818;"></div>
-                        <div class="color_sector" style="background-color: #000000"></div>
-                        <div class="color_sector" style="background-color: #212121"></div>
-                        <div class="color_sector" style="background-color: #3c3c3c"></div>
-                    </div>
-                    <div class="palette">
-                        <div class="color_sector" style="background-color: #162852;"></div>
-                        <div class="color_sector" style="background-color: #2f408e"></div>
-                        <div class="color_sector" style="background-color: #142d5f"></div>
-                        <div class="color_sector" style="background-color: #5dd6b9"></div>
-                    </div>
-                    <div class="palette">
-                        <div class="color_sector" style="background-color: #5d6883;"></div>
-                        <div class="color_sector" style="background-color: #2b313a"></div>
-                        <div class="color_sector" style="background-color: #40495c"></div>
-                        <div class="color_sector" style="background-color: #73bcbb"></div>
-                    </div>
-                    <div id="open_custom_palette">
-                        <img src="/static/palette.svg" alt="custom palette"/>
-                    </div>
-                    <div id="open_settings">
-                        <img src="/static/settings.svg" alt="settings"/>
+        <div class="section">
+            <form method="post" action="">
+                <div class="section">
+                    <label>
+                        <input type="text" name="location" required placeholder="🔍 Type a location"/>
+                    </label>
+                    <input type="hidden" id="palette" name="palette" value="">
+                </div>
+
+                <div class="section">
+                    <h4>Choose a palette</h4>
+                    <div class="palettes_grid">
+                        <div class="palette">
+                            <div class="color_sector" style="background-color: #2d2d2d;"></div>
+                            <div class="color_sector" style="background-color: #2d3535"></div>
+                            <div class="color_sector" style="background-color: #405373"></div>
+                            <div class="color_sector" style="background-color: #85ffdd"></div>
+                        </div>
+                        <div class="palette">
+                            <div class="color_sector" style="background-color: #314e88;"></div>
+                            <div class="color_sector" style="background-color: #cad6e2"></div>
+                            <div class="color_sector" style="background-color: #4b95d2"></div>
+                            <div class="color_sector" style="background-color: #3789d1"></div>
+                        </div>
+                        <div class="palette">
+                            <div class="color_sector" style="background-color: #7ec583;"></div>
+                            <div class="color_sector" style="background-color: #3ead82"></div>
+                            <div class="color_sector" style="background-color: #22b284"></div>
+                            <div class="color_sector" style="background-color: #f8f37e"></div>
+                        </div>
+                        <div class="palette">
+                            <div class="color_sector" style="background-color: #7c2050;"></div>
+                            <div class="color_sector" style="background-color: #4e1538"></div>
+                            <div class="color_sector" style="background-color: #a13158"></div>
+                            <div class="color_sector" style="background-color: #de568c"></div>
+                        </div>
+                        <div class="palette">
+                            <div class="color_sector" style="background-color: #181818;"></div>
+                            <div class="color_sector" style="background-color: #000000"></div>
+                            <div class="color_sector" style="background-color: #212121"></div>
+                            <div class="color_sector" style="background-color: #3c3c3c"></div>
+                        </div>
+                        <div class="palette">
+                            <div class="color_sector" style="background-color: #162852;"></div>
+                            <div class="color_sector" style="background-color: #2f408e"></div>
+                            <div class="color_sector" style="background-color: #142d5f"></div>
+                            <div class="color_sector" style="background-color: #5dd6b9"></div>
+                        </div>
+                        <div class="palette">
+                            <div class="color_sector" style="background-color: #5d6883;"></div>
+                            <div class="color_sector" style="background-color: #2b313a"></div>
+                            <div class="color_sector" style="background-color: #40495c"></div>
+                            <div class="color_sector" style="background-color: #73bcbb"></div>
+                        </div>
+                        <div id="open_custom_palette">
+                            <img src="/static/palette.svg" alt="custom palette"/>
+                        </div>
+                        <div id="open_settings">
+                            <img src="/static/settings.svg" alt="settings"/>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="section" style="display: inline-grid; gap: 2rem;">
-                <input type="submit" name="create_map" value="Create map">
-            </div>
+                <div class="section">
+                    <input type="submit" name="create_map" value="Create map">
+                </div>
 
-            {% if error %}
+                <dialog id="settings_dialog">
+                    <h2>Settings</h2>
+                    <div class="dialog_content">
+                        <label for="zoom_level">Aproximate zoom level:</label>
+                        <select id="zoom_level" name="zoom_level">
+                            <option value="5">Continent</option>
+                            <option value="10">City</option>
+                            <option value="14" selected="selected">Streets</option>
+                            <option value="18">Buildings</option>
+                        </select>
+                        <button type="button" id="close_settings" class="pretty_button">Done</button>
+                    </div>
+                </dialog>
+
+            </form>
+
+        </div>
+
+        {% if error %}
+        <div class="section">
             <p>⚠️ {{ error }}</p>
-            {% endif %}
+        </div>
+        {% endif %}
 
-            <dialog id="settings_dialog">
-                <h1>Settings</h1>
-                <div class="dialog_content">
-                    <label for="zoom_level">Aproximate zoom level:</label>
-                    <select id="zoom_level" name="zoom_level">
-                        <option value="5">Continent</option>
-                        <option value="10">City</option>
-                        <option value="14" selected="selected">Streets</option>
-                        <option value="18">Buildings</option>
-                    </select>
-                    <button type="button" id="close_settings" class="pretty_button">Done</button>
-                </div>
-            </dialog>
-
-        </form>
+        {% if rendered_map %}
+        <div id="map_div" class="section">
+            <img id='map' src="{{ rendered_map }}" alt="Your map">
+        </div>
+        <a target="_blank" href="{{ rendered_map }}">
+            <button type="button" id="download" class="pretty_button">Download</button>
+        </a>
+        {% endif %}
 
         <dialog id="custom_pallete_dialog">
-            <h1>Select your own colors</h1>
+            <h2>Choose your own colors</h2>
             <div class="dialog_content">
                 <div id="custom_palette">
                     <label for="roads_color">Roads</label>
@@ -122,14 +137,12 @@
 
     </div>
 
-    {% if rendered_map %}
-    <div id="map_div" class="section">
-        <img id='map' src="{{ rendered_map }}" alt="Your map">
-    </div>
-    <!-- <input type="button" name="download_map" value="⬇️ Download"> -->
-    {% endif %}
+</main>
 
-</div>
+<footer>
+    <p>© Laureano Ruiz · <a href="https://www.linkedin.com/in/laureanorp/">LinkedIn</a> · <a
+            href="https://github.com/laureanorp/minimal_maps">GitHub repo</a></p>
+</footer>
 
 <script>
     // Easier to do this transformation on the frontend

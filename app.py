@@ -41,7 +41,7 @@ def get_redered_map_url(address: str, palette: List[str], zoom: str) -> str:
 @app.route('/', methods=['GET'])
 def home():
     if app.config['GMAPS_API_KEY'] == '':
-        return 'Please set your Google Maps API key in app.py, otherwise the request will not work.'
+        return 'Please set your Google Maps API key in gmaps_key.txt. Otherwise the request will not work.'
 
     return render_template('index.html')
 
@@ -53,14 +53,14 @@ def request_and_show_map():
     hex_palette = request.form['palette'].split('-')
     zoom = request.form['zoom_level']
     if len(hex_palette) != 4:
-        return render_template('index.html', error="Choose a color palette before continuing")
+        return render_template('index.html', error="Choose a color palette to continue")
     # Normalise the input address
     try:
         geolocator = Nominatim(user_agent="laureanorp")
         normalised_address = geolocator.geocode(query=address)
     except Exception as e:
         app.logger.error(e)
-        return render_template('index.html', error="We couldn't find that location, please try another")
+        return render_template('index.html', error="We couldn't find that location, please try a different one")
     # Get the map image
     try:
         return render_template('index.html', rendered_map=get_redered_map_url(normalised_address, hex_palette, zoom))
