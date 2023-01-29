@@ -5,7 +5,7 @@ from flask import Flask, render_template, request
 from geopy import Nominatim
 
 app = Flask(__name__)
-
+# open gmaps_key.txt file
 with open('gmaps_key.txt', 'r') as f:  # YOUR GOOGLE MAPS API KEY TXT FILE
     app.config['GMAPS_API_KEY'] = f.read()
 
@@ -42,6 +42,7 @@ def get_redered_map_url(address: str, palette: List[str], zoom: str) -> str:
 def home():
     if app.config['GMAPS_API_KEY'] == '':
         return 'Please set your Google Maps API key in gmaps_key.txt. Otherwise the request will not work.'
+
     return render_template('index.html')
 
 
