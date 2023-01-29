@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../static/custom.css">
+    <link rel="stylesheet" href="/static/custom.css">
 </head>
 
 <body>
@@ -202,8 +202,8 @@
         e.preventDefault();
         // if the user didn't select a palette, show an error
         const palette_field = document.querySelector("#palette");
+        const error_div = document.querySelector("#error_div");
         if (palette_field.value === '') {
-            const error_div = document.querySelector("#error_div");
             error_div.style.display = 'revert';
             error_div.innerHTML = '<p>Please select a palette to continue</p>';
             return;
@@ -218,7 +218,7 @@
         url.searchParams.append('zoom', document.querySelector("#zoom_level").value);
         url.searchParams.append('center', document.querySelector("#location").value);
         url.searchParams.append('style',
-            `feature:all|element:all|color:0x${colors[0]}`);  // land color
+            `feature:all|element:all|color:0x${colors[0]}`);  // main color (land)
         url.searchParams.append('style',
             `feature:road|element:geometry|color:0x${colors[3]}`);  // roads color
         url.searchParams.append('style',
@@ -226,9 +226,11 @@
         url.searchParams.append('style',
             `feature:water|element:geometry|color:0x${colors[1]}`); // water color
         url.searchParams.append('style',
-            `feature:administrative|geometry:all|color:0x${colors[2]}`);  // cities color
+            `feature:landscape.man_made|geometry|color:0x${colors[2]}`);  // cities color
         url.searchParams.append('style',
             'feature:all|element:labels|visibility:off');
+        url.searchParams.append('style',
+            'feature:transit|element:all|visibility:off');
         url.searchParams.append('key', gmaps_api_key);
         url.searchParams.append('scale', '2');
 
