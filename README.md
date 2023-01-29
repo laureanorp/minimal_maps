@@ -1,6 +1,6 @@
 # Minimal maps
 
-![staticmap](https://user-images.githubusercontent.com/14150766/179356728-dfb72b83-1a29-43cf-8f7e-905bcafd90fc.png)
+![staticmap](https://user-images.githubusercontent.com/14150766/215328357-ef55b317-4056-4bc4-b3e3-c88ec5b2a627.png)
 
 #### Get a minimal and colorful map of a given location · Flask + Nominatim + Google Maps
 
@@ -15,5 +15,16 @@ After trying some geocoders and APIs, I decided wanted to experiment a bit with 
 5. Run `python app.py`
 6. Open http://localhost:5000/
 
-<img width="686" alt="image" src="https://user-images.githubusercontent.com/14150766/179356724-dc032c82-0a9e-4501-be3d-e35091db008f.png">
+<img width="1033" alt="image" src="https://user-images.githubusercontent.com/14150766/215328428-cd88e5ad-348a-4851-abb6-8034b26aee8f.png">
 
+<img width="1033" alt="image" src="https://user-images.githubusercontent.com/14150766/215328469-e19b79a3-4aa6-49c0-82f3-c7263d75b9c4.png">
+
+<img width="1033" alt="image" src="https://user-images.githubusercontent.com/14150766/215328500-d11949d7-b4e7-4133-847f-f6f4c4295a51.png">
+
+### Use diffent zoom levels to cover bigger areas
+
+<img width="1033" alt="image" src="https://user-images.githubusercontent.com/14150766/215328488-2251e349-df57-4084-978f-8dcb71fae3c7.png">
+
+### And even set your own colors for the map
+
+<img width="1033" alt="image" src="https://user-images.githubusercontent.com/14150766/215328494-a43770b1-1815-44eb-aa64-3fda7e57f3e6.png">
