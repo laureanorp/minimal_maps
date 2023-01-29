@@ -15,14 +15,12 @@
 
 <main>
     <div class="container">
-
         <h1>Minimal Maps</h1>
-
-        <div class="section">
-            <form method="post" action="">
+        <form>
+            <div class="section">
                 <div class="section">
                     <label>
-                        <input type="text" name="location" required placeholder="🔍 Type a location"/>
+                        <input type="text" id="location" required placeholder="🔍 Type a location"/>
                     </label>
                     <input type="hidden" id="palette" name="palette" value="">
                 </div>
@@ -98,25 +96,17 @@
                         <button type="button" id="close_settings" class="pretty_button">Done</button>
                     </div>
                 </dialog>
+            </div>
+        </form>
 
-            </form>
+        <div id="error_div" class="section"></div>
 
-        </div>
-
-        {% if error %}
-        <div class="section">
-            <p>⚠️ {{ error }}</p>
-        </div>
-        {% endif %}
-
-        {% if rendered_map %}
         <div id="map_div" class="section">
-            <img id='map' src="{{ rendered_map }}" alt="Your map">
+            <img id='map' src="" alt="Your map">
         </div>
-        <a target="_blank" href="{{ rendered_map }}">
-            <button type="button" id="download" class="pretty_button">Download</button>
+        <a id="download" target="_blank" href="">
+            <button type="button" class="pretty_button">Download</button>
         </a>
-        {% endif %}
 
         <dialog id="custom_pallete_dialog">
             <h2>Choose your own colors</h2>
@@ -134,9 +124,7 @@
                 <button type="button" id="close_custom_palette" class="pretty_button">Done</button>
             </div>
         </dialog>
-
     </div>
-
 </main>
 
 <footer>
@@ -145,7 +133,12 @@
 </footer>
 
 <script>
-    // Easier to do this transformation on the frontend
+    // Set your own Google Maps Static API key here if you want to run the app locally
+    const gmaps_api_key = 'AIzaSyBPJmZeJP7sQ13wiMaBKmCtwrbqwl8BvAA';
+
+    // Init empty color palette
+    let colors = [];
+
     const rgba2hex = (rgba) =>
         `${rgba.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+\.{0,1}\d*))?\)$/).slice(1).map((n, i) => (i === 3 ? Math.round(parseFloat(n) * 255) : parseFloat(n)).toString(16).padStart(2, '0').replace('NaN', '')).join('')}`
     // Init custom palette button to apply effects
@@ -162,7 +155,7 @@
             open_custom_palette.classList.remove('selected');
             this.classList.add('selected');
             // reset list of selected colors
-            const colors = [];
+            colors = [];
             // save to the list all the background colors of the selected palette
             const color_sectors = this.querySelectorAll('.color_sector');
             for (const color_sector of color_sectors) {
@@ -182,7 +175,7 @@
             palette.classList.remove('selected');
         }
         // reset list of selected colors
-        const colors = [];
+        colors = [];
         // the user is setting a custom palette, so we get the colors from the input fields
         const custom_colors = document.querySelectorAll('input[type="color"]');
         for (const custom_color of custom_colors) {
@@ -202,6 +195,52 @@
     open_settings.addEventListener('click', () => settings_dialog.showModal());
     close_settings.addEventListener('click', () => settings_dialog.close());
 
+    // when the user clicks the create map button
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (e) => {
+        // don't "really" submit the form
+        e.preventDefault();
+        // if the user didn't select a palette, show an error
+        const palette_field = document.querySelector("#palette");
+        if (palette_field.value === '') {
+            const error_div = document.querySelector("#error_div");
+            error_div.style.display = 'revert';
+            error_div.innerHTML = '<p>Please select a palette to continue</p>';
+            return;
+        } else {  // if the user selected a palette, hide the error
+            error_div.innerHTML = '';
+            error_div.style.display = 'none';
+        }
+
+        // Construct the map URL with the selected options
+        let url = new URL('https://maps.googleapis.com/maps/api/staticmap');
+        url.searchParams.append('size', '1280x1280');
+        url.searchParams.append('zoom', document.querySelector("#zoom_level").value);
+        url.searchParams.append('center', document.querySelector("#location").value);
+        url.searchParams.append('style',
+            `feature:all|element:all|color:0x${colors[0]}`);  // land color
+        url.searchParams.append('style',
+            `feature:road|element:geometry|color:0x${colors[3]}`);  // roads color
+        url.searchParams.append('style',
+            'feature:road|element:geometry|visibility:simplified');
+        url.searchParams.append('style',
+            `feature:water|element:geometry|color:0x${colors[1]}`); // water color
+        url.searchParams.append('style',
+            `feature:administrative|geometry:all|color:0x${colors[2]}`);  // cities color
+        url.searchParams.append('style',
+            'feature:all|element:labels|visibility:off');
+        url.searchParams.append('key', gmaps_api_key);
+        url.searchParams.append('scale', '2');
+
+        // Set source of the rendered map image to the url generated by GMaps API
+        document.querySelector('#map').src = url;
+        const download = document.querySelector('#download')
+        download.href = url
+
+        // Turn map and download button visible
+        download.style.display = 'revert';
+        document.querySelector('#map_div').style.display = 'flex';
+    })
 </script>
 
 </body>

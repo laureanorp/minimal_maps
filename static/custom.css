@@ -137,14 +137,25 @@ dialog::backdrop {
     width: 2rem;
 }
 
+#error_div {
+    display: none;
+    padding: 1rem;
+    background-color: #fff6d9;
+    border-radius: 1rem;
+}
+
 #map_div {
-    display: flex;
+    display: none;
     justify-content: center;
 }
 
 #map {
     width: 100%;
     border-radius: 10px;
+}
+
+#download {
+    display: none;
 }
 
 footer {

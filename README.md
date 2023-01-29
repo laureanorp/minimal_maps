@@ -2,18 +2,15 @@
 
 ![staticmap](https://user-images.githubusercontent.com/14150766/215328357-ef55b317-4056-4bc4-b3e3-c88ec5b2a627.png)
 
-#### Get a minimal and colorful map of a given location · Flask + Nominatim + Google Maps
+### Get a minimal and colorful map of a given location
 
-After trying some geocoders and APIs, I decided wanted to experiment a bit with Google Maps' API. This Flask app takes a location as input, as well as a color palette, and returns a minimalistic map of the location to see/download. This work is inspired by [Matteo Lobello's andrioid app](https://play.google.com/store/apps/details?id=com.matteolobello.mapapers).
+After trying some geocoders and APIs, I decided wanted to experiment a bit with Google Maps' API. This app lets you write a location and choose a color palette, and returns a minimalistic map of the desired location. In the begging, this was a Flask (Python) app that also used Nominatim as a geocoder. But in the end I transitioned to a full frontend solution, so I could improve the UX and practice my JS. This work is inspired by [Matteo Lobello's andrioid app](https://play.google.com/store/apps/details?id=com.matteolobello.mapapers).
 
-## Running the project
+## Running the app
 
 1. Clone/download repo
-2. Create a venv (recommended, but there are only 3 required dependencies)
-3. Run `pip install -r requirements.txt`
-4. Add the file `gmaps_key.txt` with your Google Maps API key
-5. Run `python app.py`
-6. Open http://localhost:5000/
+2. Add your Google Maps Static API key to the corresponding line in `index.html`
+3. Just open `index.html` in your favorite browser
 
 <img width="1033" alt="image" src="https://user-images.githubusercontent.com/14150766/215328428-cd88e5ad-348a-4851-abb6-8034b26aee8f.png">
 
